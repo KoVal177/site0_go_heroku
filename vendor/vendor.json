@@ -1,6 +1,25 @@
 {
 	"comment": "",
 	"ignore": "test",
-	"package": [],
+	"package": [
+		{
+			"checksumSHA1": "mnovMxhQII61okODcjEWJ7q8ODc=",
+			"path": "github.com/lib/pq",
+			"revision": "1ef134dc0e0dcdf8097ca347580c15df72ef786e",
+			"revisionTime": "2022-04-07T21:32:42Z"
+		},
+		{
+			"checksumSHA1": "GX2hcQP8YqrXH+laJJIxUFsqoxU=",
+			"path": "github.com/lib/pq/oid",
+			"revision": "1ef134dc0e0dcdf8097ca347580c15df72ef786e",
+			"revisionTime": "2022-04-07T21:32:42Z"
+		},
+		{
+			"checksumSHA1": "PStZaE3pKgMy1kk+hHB/of2FYBk=",
+			"path": "github.com/lib/pq/scram",
+			"revision": "1ef134dc0e0dcdf8097ca347580c15df72ef786e",
+			"revisionTime": "2022-04-07T21:32:42Z"
+		}
+	],
 	"rootPath": "site"
 }
