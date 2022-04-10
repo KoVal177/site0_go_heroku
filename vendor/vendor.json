@@ -2,9 +2,5 @@
 	"comment": "",
 	"ignore": "test",
 	"package": [],
-	"rootPath": "site",
-	 "heroku": {
-        "install" : [ "./..." ],
-        "goVersion": "go1.18"
-         },
+	"rootPath": "site"
 }
