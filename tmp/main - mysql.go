@@ -3,15 +3,11 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	//	"github.com/go-sql-driver/mysql"
-	_ "github.com/lib/pq"
+	"github.com/go-sql-driver/mysql"
 	"html/template"
 	"net/http"
-	//"reflect"
-	//"strconv"
 )
 
-/*
 var Cfg = mysql.Config{
 	User:                 "valiok",
 	Passwd:               "zaebalinah123456",
@@ -20,29 +16,6 @@ var Cfg = mysql.Config{
 	DBName:               "golang_valiok",
 	AllowNativePasswords: true,
 }
-*/
-
-/*
-const (
-	host     = "localhost"
-	port     = 5432
-	user     = "postgres"
-	password = "postgres"
-	dbname   = "postgres"
-)
-*/
-
-const (
-	host     = "ec2-3-230-122-20.compute-1.amazonaws.com"
-	port     = 5432
-	user     = "azcivxdazpjqxx"
-	password = "a4a263001481fdc1b78d3f6dba95951922238714f80692905aa11901d86035a2"
-	dbname   = "da1uletl8ugi64"
-)
-
-var psqlInfo string = fmt.Sprintf("host=%s port=%d user=%s "+
-	"password=%s dbname=%s", //sslmode=disable",
-	host, port, user, password, dbname)
 
 type Article struct {
 	Id                     uint16
@@ -56,17 +29,16 @@ func index(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Fprintf(w, err.Error())
 	}
-	db, err := sql.Open("postgres", psqlInfo)
+	db, err := sql.Open("mysql", Cfg.FormatDSN())
 	if err != nil {
 		panic(err)
 	}
 	defer db.Close()
 
-	res, err := db.Query(fmt.Sprintf("SELECT * FROM articles"))
+	res, err := db.Query(fmt.Sprintf("SELECT * FROM `articles`"))
 	if err != nil {
 		panic(err)
 	}
-	defer res.Close()
 
 	posts = []Article{}
 	for res.Next() {
@@ -99,19 +71,13 @@ func save_article(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Не все поля заполнены")
 	} else {
 
-		db, err := sql.Open("postgres", psqlInfo)
+		db, err := sql.Open("mysql", Cfg.FormatDSN())
 		if err != nil {
 			panic(err)
 		}
 		defer db.Close()
 
-		res, _ := db.Query(fmt.Sprintf("SELECT max(id) FROM articles"))
-		var id int
-		res.Next()
-		err = res.Scan(&id)
-		id++
-
-		insert, err := db.Query(fmt.Sprintf("INSERT INTO articles (id, title, anons, full_text) VALUES (%d, '%s', '%s', '%s')", id, title, anons, full_text))
+		insert, err := db.Query(fmt.Sprintf("INSERT INTO `articles` (`title`, `anons`, `full_text`) VALUES ('%s', '%s', '%s')", title, anons, full_text))
 		if err != nil {
 			panic(err)
 		}
@@ -132,7 +98,7 @@ func handleRequest() {
 }
 
 func main() {
-	fmt.Println("starting...")
+
 	handleRequest()
 
 }
