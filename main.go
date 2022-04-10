@@ -7,6 +7,7 @@ import (
 	_ "github.com/lib/pq"
 	"html/template"
 	"net/http"
+	"os"
 	//"reflect"
 	//"strconv"
 )
@@ -128,7 +129,7 @@ func handleRequest() {
 	http.HandleFunc("/", index)
 	http.HandleFunc("/create/", create)
 	http.HandleFunc("/save_article/", save_article)
-	http.ListenAndServe(":", nil)
+	http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 }
 
 func main() {
