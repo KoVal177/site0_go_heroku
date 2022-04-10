@@ -128,7 +128,7 @@ func handleRequest() {
 	http.HandleFunc("/", index)
 	http.HandleFunc("/create/", create)
 	http.HandleFunc("/save_article/", save_article)
-	http.ListenAndServe(":90", nil)
+	http.ListenAndServe(":", nil)
 }
 
 func main() {
