@@ -2,7 +2,7 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
+	//"fmt"
 	//	"github.com/go-sql-driver/mysql"
 	_ "github.com/lib/pq"
 	"html/template"
@@ -132,7 +132,7 @@ func handleRequest() {
 }
 
 func main() {
-	fmt.Println("starting...")
+	//fmt.Println("starting...")
 	handleRequest()
 
 }
